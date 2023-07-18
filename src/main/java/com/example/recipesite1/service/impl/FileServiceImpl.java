@@ -9,16 +9,18 @@ import java.nio.file.Path;
 
 public class FileServiceImpl implements FileService {
 
-    @Value("${path.to.data.file}")
-    private String filePath;
+    @Value("/src/main/resources/recipes.json")
+    private String recipeFilePath;
 
-    @Value("${file.name}")
-    private String fileName;
+    @Value("recipes.json")
+    private String recipeFileName;
+    @Value("${ingredients.file.name}")
+    private String ingredientFileName;
 
     @Override
     public String readFromFile() {
         try {
-            return Files.readString(Path.of(filePath));
+            return Files.readString(Path.of(recipeFilePath));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -27,10 +29,10 @@ public class FileServiceImpl implements FileService {
     @Override
     public boolean saveToFile(String json) {
         try {
-            Files.writeString(Path.of(filePath), json);
+            Files.writeString(Path.of(recipeFilePath), json);
             return true;
         } catch (IOException e) {
-            return false;
+            throw new RuntimeException(e);
         }
     }
 }

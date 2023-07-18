@@ -12,6 +12,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"name", "ingredients"}) //"  ingredients")
 
+
 public class Recipe {
 
     private String name;

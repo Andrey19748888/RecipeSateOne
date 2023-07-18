@@ -19,6 +19,7 @@ public class IngredientServiceImpl implements com.example.recipesite1.service.In
     public IngredientServiceImpl() {
         map = new HashMap<>();
          map.put(7, new Ingredient("помидоры", 4, "единиц"));// todo remove this line
+
     }
 
     @Override
