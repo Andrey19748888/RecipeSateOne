@@ -9,13 +9,13 @@ import java.nio.file.Path;
 
 public class FileServiceImpl implements FileService {
 
-    @Value("/src/main/resources/recipes.json")
-    private String recipeFilePath;
+//    @Value("/src/main/resources/recipes.json")
+    private String recipeFilePath = "src/main/resources/recipes.json";
 
-    @Value("recipes.json")
-    private String recipeFileName;
-    @Value("${ingredients.file.name}")
-    private String ingredientFileName;
+//    @Value("recipes.json")
+    private String recipeFileName = "recipes.json";
+//    @Value("${ingredients.file.name}")
+    private String ingredientFileName = "${ingredients.file.name}";
 
     @Override
     public String readFromFile() {

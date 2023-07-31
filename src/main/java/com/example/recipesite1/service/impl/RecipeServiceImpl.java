@@ -8,6 +8,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -16,15 +17,19 @@ public class RecipeServiceImpl implements RecipeService {
     private static int idCounter = 1;
 
     private HashMap<Integer, Recipe> recipes;
-    private FileService fileService;
+    private FileService fileService;    // todo прописать этот же сервис в IngredientServiceImpl
 
 
-
-    public RecipeServiceImpl() {
-        recipes = new HashMap<>();
+    @PostConstruct
+    public void init() {
         fileService = new FileServiceImpl();
-        recipes.put(5, new Recipe("spaghetti", 10, null, null)); // todo remove this line
-        saveToFile();       // todo у;рат,
+        System.out.println(recipes);    // todo стереть эту строку
+        readFromFile();     // импорт всего нашего файла в HashMap recipes  todo added
+        System.out.println(recipes);    // todo стереть эту строку
+//        recipes = new HashMap<>();    // todo стереть эту строку
+//        recipes.put(5, new Recipe("spaghetti", 10, null, null)); // todo remove this line
+//        saveToFile();       // todo у;рат,
+
     }
 
     public void saveToFile() {  // это сдесь
@@ -40,7 +45,11 @@ public class RecipeServiceImpl implements RecipeService {
     public void readFromFile() {
         ObjectMapper mapper = new ObjectMapper();
         String json = fileService.readFromFile();
-        recipes = mapper.readValue(json, new TypeReference<HashMap<Integer, Recipe>>())
+        try {
+            recipes = mapper.readValue(json, HashMap.class);        // todo added
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -103,7 +112,7 @@ public class RecipeServiceImpl implements RecipeService {
 
         if (recipes.containsKey(id)) {
             recipes.put(id, recipe);
-            saveToFile(); // aaaaaaz
+            saveToFile(); // todo aaaaz
         } else {
             throw new RuntimeException("Рецепта с таким id нет");
         }

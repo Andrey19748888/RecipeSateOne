@@ -1,0 +1,1 @@
+{"1":{"name":"борщ","time":39,"ingredients":[{"name":"eggs","numberOfIngredients":3,"unit":"units"}],"steps":["сделать борщ"]},"1":{"name":"каша","time":24,"ingredients":[{"name":null,"numberOfIngredients":100,"unit":"15"}],"steps":["сделать кашу"]},"5":{"name":"spaghetti","time":10,"ingredients":null,"steps":null}}

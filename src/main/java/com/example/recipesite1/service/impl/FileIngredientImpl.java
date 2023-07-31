@@ -10,10 +10,10 @@ import java.nio.file.Path;
 
 @Service
 public class FileIngredientImpl implements FileIngredient {
-    @Value("${path.to.data.faleIngredient}")
-    private String pathFileIngredient;
-    @Value("${mame.of.data.faleIngredient}")
-    private String fileNameIngredient;
+//    @Value("${path.to.data.faleIngredient}")
+    private String pathFileIngredient = "src/main/resources/ingredients.json";
+//    @Value("${mame.of.data.faleIngredient}")
+    private String fileNameIngredient = "ingredients.json";
 
     @Override
     public String readFromFileIngredient() {
@@ -30,7 +30,7 @@ public class FileIngredientImpl implements FileIngredient {
             Files.writeString(Path.of(pathFileIngredient), json);
             return true;
         } catch (IOException e) {
-            return false;
+            throw new RuntimeException(e);
         }
     }
 }
